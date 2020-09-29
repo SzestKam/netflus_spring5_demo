@@ -12,6 +12,8 @@ import szestkam.netflux.service.MovieService;
 import java.time.Duration;
 import java.util.Date;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
+
 @Service
 public class MovieServiceImpl implements MovieService {
 
@@ -23,10 +25,10 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Flux<MovieEvent> events(String movieID) {
-        return Flux.<MovieEvent>generate(
-                movieEventSynchronousSink -> movieEventSynchronousSink.next(new MovieEvent(movieID, new Date())))
-                .delayElements(Duration.ofSeconds(1));
+    public Flux<MovieEvent> events(String movieId) {
+        return Flux.<MovieEvent>generate(movieEventSynchronousSink -> movieEventSynchronousSink.next(
+                new MovieEvent(movieId, new Date())
+        )).delayElements(Duration.of(1, SECONDS));
     }
 
     @Override

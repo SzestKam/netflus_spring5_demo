@@ -2,10 +2,7 @@ package szestkam.netflux.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import szestkam.netflux.domain.Movie;
@@ -14,6 +11,7 @@ import szestkam.netflux.service.MovieService;
 
 @RestController
 @RequestMapping("/movies")
+@CrossOrigin(origins = "http://localhost:8080")
 public class MovieController {
 
     private final MovieService movieService;
